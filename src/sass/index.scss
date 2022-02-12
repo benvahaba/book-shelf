@@ -1,0 +1,28 @@
+@import "_base";
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: $color-primary-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 10vh;
+  // display: flex;
+  // justify-content: space-evenly;
+
+  // background-color: $color-primary-blue-light;
+
+  &__paragraph--box {
+    flex: 1;
+    margin: auto;
+    text-align: center;
+    background-color: aqua;
+    height: 100%;
+  }
+}
