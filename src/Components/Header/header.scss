@@ -1,0 +1,9 @@
+@import "../../sass/_base";
+.header {
+  color: white;
+  position: fixed;
+  width: 100%;
+  background-color: $color-primary-blue;
+  display: flex;
+  height: 10vh;
+}

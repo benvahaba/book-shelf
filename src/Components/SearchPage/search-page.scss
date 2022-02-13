@@ -1,0 +1,10 @@
+@import "../../sass/_base";
+.search-page {
+  width: 100%;
+  height: 100vh;
+  background-color: $color-primary-blue-dark;
+  position: relative;
+  font-size: 2rem;
+  text-align: center;
+  top: 10vh;
+}

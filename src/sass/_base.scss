@@ -3,5 +3,35 @@ $color-primary-blue: rgb(0, 77, 153);
 $color-primary-blue-light: rgb(0, 89, 179);
 
 $color-primary-green-dark: rgb(0, 154, 0);
-$color-primary-green: rgb(0,179,0);
-$color-primary-green-light: rgb(0,205,0);
+$color-primary-green: rgb(0, 179, 0);
+$color-primary-green-light: rgb(0, 205, 0);
+
+$color-text: white;
+
+.nav--link {
+  text-decoration: none;
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+  color: $color-text;
+}
+.page-container {
+  padding: 3rem;
+}
+h1 {
+  font-size: 3em;
+  color: $color-text;
+}
+h2 {
+  font-size: 2em;
+  color: $color-text;
+}
+h3 {
+  font-size: 1em;
+  color: white;
+}
+.y_spacing_one_em {
+  padding: 1rem 0;
+}
+.nav--current {
+  background-color: $color-primary-blue-dark;
+}
