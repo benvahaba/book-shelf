@@ -7,5 +7,14 @@
   position: relative;
   font-size: 2rem;
   text-align: center;
-  top: 10vh;
+}
+.container--bubble {
+  position: relative;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: white;
+  width: max-content;
+  height: max-content;
+  border-radius: 50%;
 }

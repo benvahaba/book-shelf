@@ -8,6 +8,8 @@ $color-primary-green-light: rgb(0, 205, 0);
 
 $color-text: white;
 
+$search-book-container-width: 20vw;
+
 .nav--link {
   text-decoration: none;
   font-size: 1.5rem;
@@ -34,4 +36,17 @@ h3 {
 }
 .nav--current {
   background-color: $color-primary-blue-dark;
+}
+.color__text--primary {
+  color: $color-primary-blue-light;
+}
+.center_text {
+  display: flex;
+  align-items: center;
+}
+.letter__spacing--small {
+  letter-spacing: 0.2rem;
+}
+.background_opacity_05 {
+  opacity: 0.5;
 }
