@@ -20,7 +20,6 @@ function App() {
     }
     return validUser;
   }
-  console.log("isValidUser", isValidUser(userName), userName);
 
   return (
     <BrowserRouter>

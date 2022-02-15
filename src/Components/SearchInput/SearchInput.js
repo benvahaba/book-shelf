@@ -5,7 +5,7 @@ function SearchImput(props) {
   return (
     <input
       onChange={(event) => {
-        props.SearchResaulthandle(event);
+        props.SearchResulthandle(event);
       }}
       className="search_input"
       type={"text"}

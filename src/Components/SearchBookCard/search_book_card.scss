@@ -1,0 +1,26 @@
+@import "../../sass/_base";
+.search_book_card {
+  display: flex;
+  flex-direction: column;
+
+  height: 90%;
+  width: 13%;
+  border-radius: 2%;
+
+  padding: 1.5rem;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(115%);
+  }
+  &:active {
+    transform: scale(110%);
+  }
+}
+
+.image_style {
+  max-height: 50%;
+  width: auto;
+}
+.card--info {
+  padding-top: 1rem;
+}

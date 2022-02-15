@@ -1,24 +1,35 @@
-import React, { useContext, useRef, useEffect } from "react";
+//scss imports
 import "./search-page.scss";
 import "../../sass/background--library.scss";
+//hooks
 import userNameContext from "../../hooks/context/userNameContext";
+import React, { useState, useContext, useRef, useEffect } from "react";
 
+//components
 import SearchImput from "../SearchInput/SearchInput";
 import ResaultContainer from "../ResaultContainer/ResaultContainer";
 import H2 from "../H2/H2";
 import SearchHeader from "../SearchHeader/SearchHeader";
+
+//js classes
 import * as model from "../../model";
+import BooksListContainer from "../BooksListContainer/BooksListContainer";
+import SearchBookCard from "../SearchBookCard/SearchBookCard";
 
 function SearchPage() {
   const [userName] = useContext(userNameContext);
   const inputRef = useRef(null);
+  const [booksList, setBooksList] = new useState([]);
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
-  function SearchResaulthandle(event) {
-    // console.log("handleSearchResault", event.target.value);
-    model.searchBook(event.target.value);
+  function SearchResulthandle(event) {
+    model.searchBook(event.target.value, _onResultsFetched);
+  }
+  function _onResultsFetched() {
+    setBooksList(model.state.searchResults);
+    console.log("booksList", booksList);
   }
 
   const initialH2Classes = "center_text letter__spacing--small welcome_user";
@@ -26,14 +37,33 @@ function SearchPage() {
     <div className="search-page background--library">
       <SearchHeader>
         <SearchImput
-          SearchResaulthandle={SearchResaulthandle}
+          SearchResulthandle={SearchResulthandle}
           inputRef={inputRef}
         />
         <H2 classes={initialH2Classes}>Hi {userName}. search for some books</H2>
       </SearchHeader>
       <ResaultContainer>
-        <div className="books_container background_opacity_05">books</div>
-        <div className="book_container background_opacity_05">book</div>
+        <BooksListContainer>
+          {booksList.map((book) => {
+            // id,
+            // title,
+            // authors,
+            // categories,
+            // imageLinks,
+            // publisher,
+            // publishedDate,
+            console.log("image", book.imageLinks[0]);
+            console.log("book", book);
+            return (
+              <SearchBookCard
+                key={book.id}
+                title={book.title}
+                authors={book.authors}
+                imageLink={book.imageLinks.smallThumbnail}
+              ></SearchBookCard>
+            );
+          })}
+        </BooksListContainer>
       </ResaultContainer>
     </div>
   );
