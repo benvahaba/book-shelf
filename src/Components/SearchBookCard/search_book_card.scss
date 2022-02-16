@@ -2,6 +2,7 @@
 .search_book_card {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   height: 90%;
   width: 13%;
@@ -18,8 +19,8 @@
 }
 
 .image_style {
-  max-height: 50%;
-  width: auto;
+  height: 50%;
+  width: fit-content;
 }
 .card--info {
   padding-top: 1rem;

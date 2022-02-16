@@ -31,10 +31,32 @@ function SearchPage() {
     setBooksList(model.state.searchResults);
     console.log("booksList", booksList);
   }
+  function getPagesFromArray(books, i, maxBooks) {
+    const booksArray = [];
+    console.log("books", books);
+    for (i; i < maxBooks; i++) {
+      // id,
+      // title,
+      // authors,
+      // categories,
+      // imageLinks,
+      // publisher,
+      // publishedDate,
+      booksArray.push(
+        <SearchBookCard
+          key={books[i].id}
+          title={books[i].title}
+          authors={books[i].authors}
+          imageLink={books[i].imageLinks.smallThumbnail}
+        ></SearchBookCard>
+      );
+    }
+    return booksArray;
+  }
 
   const initialH2Classes = "center_text letter__spacing--small welcome_user";
   return (
-    <div className="search-page background--library">
+    <div className="search-page">
       <SearchHeader>
         <SearchImput
           SearchResulthandle={SearchResulthandle}
@@ -44,25 +66,7 @@ function SearchPage() {
       </SearchHeader>
       <ResaultContainer>
         <BooksListContainer>
-          {booksList.map((book) => {
-            // id,
-            // title,
-            // authors,
-            // categories,
-            // imageLinks,
-            // publisher,
-            // publishedDate,
-            console.log("image", book.imageLinks[0]);
-            console.log("book", book);
-            return (
-              <SearchBookCard
-                key={book.id}
-                title={book.title}
-                authors={book.authors}
-                imageLink={book.imageLinks.smallThumbnail}
-              ></SearchBookCard>
-            );
-          })}
+          {getPagesFromArray(booksList, 0, 5)}
         </BooksListContainer>
       </ResaultContainer>
     </div>
