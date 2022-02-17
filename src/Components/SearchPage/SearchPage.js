@@ -64,14 +64,18 @@ function SearchPage() {
   function _onResultsFetched() {
     setBooksList(model.state.searchResults);
   }
+  function onBookClickedHandler(bookId) {}
+
   function booksListToJSXList(books) {
     return books.map((book) => {
       return (
         <SearchBookCard
           key={book.id}
+          id={book.id} // todo ask Oz if i can access the key from inside the component
           title={book.title}
           authors={book.authors}
           imageLink={book.imageLinks.smallThumbnail}
+          onBookClickedHandler={onBookClickedHandler}
         ></SearchBookCard>
       );
     });
@@ -96,6 +100,9 @@ function SearchPage() {
         <H2 classes={initialH2Classes}>Hi {userName}. search for some books</H2>
       </SearchHeader>
       <ResaultContainer>
+        <BooksListContainer>
+          {booksListToJSXList(_getBooksByPageNum(pageNum))}
+        </BooksListContainer>
         <PaginationContainer>
           {Array.apply(null, { length: numberOfPages }).map((_, i) => {
             console.log("bennnnnnnnnnnnnnnnnnnnnnnnnnnnnn", numberOfPages);
@@ -109,9 +116,6 @@ function SearchPage() {
             );
           })}
         </PaginationContainer>
-        <BooksListContainer>
-          {booksListToJSXList(_getBooksByPageNum(pageNum))}
-        </BooksListContainer>
       </ResaultContainer>
     </div>
   );

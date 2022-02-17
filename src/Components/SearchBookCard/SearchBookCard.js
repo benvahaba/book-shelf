@@ -4,7 +4,12 @@ import React from "react";
 
 function SearchBookCard(props) {
   return (
-    <div className="search_book_card">
+    <div
+      className="search_book_card"
+      onClick={() => {
+        props.onBookClickedHandler(props.id);
+      }}
+    >
       <img
         className="image_style"
         src={props.imageLink}
