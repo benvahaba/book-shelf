@@ -1,14 +1,19 @@
-import "page_number.scss";
+import "./page_number.scss";
 import React from "react";
 
 function PageNumber(props) {
+  const initClases = "page_number";
+  const pressedClass = "page_pressed";
   return (
     <div
-      className="page_number"
-      key={props.PageIterator}
-      onClick={() => props.pagePressedHandler(PageIterator)}
+      onClick={() => props.pagePressedHandler(props.pageIterator)}
+      className={
+        props.pressedPageNum === props.pageIterator
+          ? initClases + " " + pressedClass
+          : initClases
+      }
     >
-      {props.PageIterator}
+      {props.pageIterator}
     </div>
   );
 }

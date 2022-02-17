@@ -1,7 +1,7 @@
 //scss imports
 import "./search-page.scss";
 import "../../sass/background--library.scss";
-//hooks
+//hooks imports
 import userNameContext from "../../hooks/context/userNameContext";
 import React, { useState, useContext, useRef, useEffect } from "react";
 
@@ -15,58 +15,102 @@ import SearchHeader from "../SearchHeader/SearchHeader";
 import * as model from "../../model";
 import BooksListContainer from "../BooksListContainer/BooksListContainer";
 import SearchBookCard from "../SearchBookCard/SearchBookCard";
+import * as config from "../../utils/config"; //todo as Oz how to import some
+import PaginationContainer from "../PaginationContainer/PaginationContainer";
+import PageNumber from "../PageNumber/PageNumber";
 
 function SearchPage() {
+  //hooks declarations
   const [userName] = useContext(userNameContext);
   const inputRef = useRef(null);
   const [booksList, setBooksList] = new useState([]);
+  const [pageNum, setPageNum] = useState(1);
+
+  const [numberOfResults, setNumberOfResults] = new useState(0);
+  const [numberOfPages, setNumberOfPages] = new useState(1);
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
-  function SearchResulthandle(event) {
+  useEffect(() => {
+    setNumberOfResults(booksList.length);
+  }, [booksList]);
+
+  useEffect(() => {
+    let pagesAmount = getNumberOfPages(
+      numberOfResults,
+      config.MAX_RESULTS_PER_PAGE
+    );
+    pagesAmount === 0 ? setNumberOfPages(0) : setNumberOfPages(pagesAmount);
+  }, [numberOfResults]);
+
+  useEffect(() => {
+    console.log("number of pages changed ", numberOfPages);
+  }, [numberOfPages]);
+
+  // varibles
+  const initialH2Classes = "center_text letter__spacing--small welcome_user";
+
+  function getNumberOfPages(numberOfResults, maxResults) {
+    console.log("numberOfResults, maxResults", numberOfResults, maxResults);
+    return Math.ceil(numberOfResults / maxResults);
+  }
+
+  function SearchResulthandler(event) {
+    setPageNum(1);
     model.searchBook(event.target.value, _onResultsFetched);
   }
   function _onResultsFetched() {
     setBooksList(model.state.searchResults);
-    console.log("booksList", booksList);
   }
-  function getPagesFromArray(books, i, maxBooks) {
-    const booksArray = [];
-    console.log("books", books);
-    for (i; i < maxBooks; i++) {
-      // id,
-      // title,
-      // authors,
-      // categories,
-      // imageLinks,
-      // publisher,
-      // publishedDate,
-      booksArray.push(
+  function booksListToJSXList(books) {
+    return books.map((book) => {
+      return (
         <SearchBookCard
-          key={books[i].id}
-          title={books[i].title}
-          authors={books[i].authors}
-          imageLink={books[i].imageLinks.smallThumbnail}
+          key={book.id}
+          title={book.title}
+          authors={book.authors}
+          imageLink={book.imageLinks.smallThumbnail}
         ></SearchBookCard>
       );
-    }
-    return booksArray;
+    });
   }
 
-  const initialH2Classes = "center_text letter__spacing--small welcome_user";
+  function _getBooksByPageNum(page = 1) {
+    const start = (page - 1) * config.MAX_RESULTS_PER_PAGE;
+    const end = page * config.MAX_RESULTS_PER_PAGE;
+    return booksList.slice(start, end);
+  }
+  function pagePressedHandler(page) {
+    setPageNum(page);
+  }
+
   return (
     <div className="search-page">
       <SearchHeader>
         <SearchImput
-          SearchResulthandle={SearchResulthandle}
+          SearchResulthandler={SearchResulthandler}
           inputRef={inputRef}
         />
         <H2 classes={initialH2Classes}>Hi {userName}. search for some books</H2>
       </SearchHeader>
       <ResaultContainer>
+        <PaginationContainer>
+          {Array.apply(null, { length: numberOfPages }).map((_, i) => {
+            console.log("bennnnnnnnnnnnnnnnnnnnnnnnnnnnnn", numberOfPages);
+            return (
+              <PageNumber
+                pressedPageNum={pageNum}
+                pageIterator={i + 1}
+                key={i + 1}
+                pagePressedHandler={pagePressedHandler}
+              ></PageNumber>
+            );
+          })}
+        </PaginationContainer>
         <BooksListContainer>
-          {getPagesFromArray(booksList, 0, 5)}
+          {booksListToJSXList(_getBooksByPageNum(pageNum))}
         </BooksListContainer>
       </ResaultContainer>
     </div>

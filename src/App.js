@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import userNameContext from "./hooks/context/userNameContext";
 
 //components
-import NavBar from "./Components/NavBar/NavBar";
+
 import WelcomePage from "./Components/Welcome/WelcomePage";
 import SearchPage from "./Components/SearchPage/SearchPage";
-import WhishlistPage from "./Components/WishlistPage/WishlistPage";
+
 //scss
 import "./sass/index.scss";
 
@@ -26,14 +26,8 @@ function App() {
       <userNameContext.Provider value={[userName, setUserName]}>
         {isValidUser(userName) ? (
           <>
-            <NavBar />
             <Routes>
               <Route path="/search" exact element={<SearchPage></SearchPage>} />
-              <Route
-                path="/wishlist"
-                exact
-                element={<WhishlistPage></WhishlistPage>}
-              />
             </Routes>
           </>
         ) : (

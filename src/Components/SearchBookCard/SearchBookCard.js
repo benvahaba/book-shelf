@@ -5,8 +5,18 @@ import React from "react";
 function SearchBookCard(props) {
   return (
     <div className="search_book_card">
-      <img className="image_style" src={props.imageLink} alt="book image"></img>
-      <h3 className="p--medium p--bold card--info">{props.title}</h3>
+      <img
+        className="image_style"
+        src={props.imageLink}
+        alt="props.title"
+      ></img>
+      {props.title.length > 20 ? (
+        <h3 className="p--medium p--bold card--info">
+          {props.title.slice(0, 20) + "..."}
+        </h3>
+      ) : (
+        <h3 className="p--medium p--bold card--info">{props.title}</h3>
+      )}
       <p className="p--small p--wight500 card--info">{props.authors}</p>
     </div>
   );

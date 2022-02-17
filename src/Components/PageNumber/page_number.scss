@@ -1,0 +1,11 @@
+@import "../../sass/_base";
+.page_number {
+  font-size: 1.5em;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+.page_pressed {
+  color: $color-primary-blue;
+  transition: all 0.2s;
+  transform: scale(120%);
+}
