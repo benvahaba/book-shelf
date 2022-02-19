@@ -18,6 +18,8 @@ import SearchBookCard from "../SearchBookCard/SearchBookCard";
 import * as config from "../../utils/config"; //todo as Oz how to import some
 import PaginationContainer from "../PaginationContainer/PaginationContainer";
 import PageNumber from "../PageNumber/PageNumber";
+import DialogBox from "../DialogBox/DialogBox";
+import BookInfo from "../BookInfo/BookInfo";
 
 function SearchPage() {
   //hooks declarations
@@ -25,9 +27,11 @@ function SearchPage() {
   const inputRef = useRef(null);
   const [booksList, setBooksList] = new useState([]);
   const [pageNum, setPageNum] = useState(1);
+  const [numberOfResults, setNumberOfResults] = useState(0);
+  const [numberOfPages, setNumberOfPages] = useState(1);
 
-  const [numberOfResults, setNumberOfResults] = new useState(0);
-  const [numberOfPages, setNumberOfPages] = new useState(1);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [currentBook, setCurrentBook] = useState(null);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -45,15 +49,10 @@ function SearchPage() {
     pagesAmount === 0 ? setNumberOfPages(0) : setNumberOfPages(pagesAmount);
   }, [numberOfResults]);
 
-  useEffect(() => {
-    console.log("number of pages changed ", numberOfPages);
-  }, [numberOfPages]);
-
   // varibles
   const initialH2Classes = "center_text letter__spacing--small welcome_user";
 
   function getNumberOfPages(numberOfResults, maxResults) {
-    console.log("numberOfResults, maxResults", numberOfResults, maxResults);
     return Math.ceil(numberOfResults / maxResults);
   }
 
@@ -64,7 +63,20 @@ function SearchPage() {
   function _onResultsFetched() {
     setBooksList(model.state.searchResults);
   }
-  function onBookClickedHandler(bookId) {}
+  function onBookClickedHandler(bookId) {
+    setCurrentBook(bookId);
+  }
+  function onDialogBoxCloseHandler(e) {
+    console.log("event", e);
+    if (e.target.id === "dialog_box") {
+      setCurrentBook(null);
+      console.log("close dialog box");
+      setOpenDialog(false);
+    }
+  }
+  useEffect(() => {
+    if (currentBook !== null) setOpenDialog(true);
+  }, [currentBook]);
 
   function booksListToJSXList(books) {
     return books.map((book) => {
@@ -92,6 +104,16 @@ function SearchPage() {
 
   return (
     <div className="search-page">
+      {openDialog ? (
+        <DialogBox id={"dialog_box"} close={onDialogBoxCloseHandler}>
+          <BookInfo
+            close={onDialogBoxCloseHandler}
+            book={booksList.find((book) => book.id === currentBook)}
+          />
+        </DialogBox>
+      ) : (
+        <></>
+      )}
       <SearchHeader>
         <SearchImput
           SearchResulthandler={SearchResulthandler}
@@ -105,7 +127,6 @@ function SearchPage() {
         </BooksListContainer>
         <PaginationContainer>
           {Array.apply(null, { length: numberOfPages }).map((_, i) => {
-            console.log("bennnnnnnnnnnnnnnnnnnnnnnnnnnnnn", numberOfPages);
             return (
               <PageNumber
                 pressedPageNum={pageNum}

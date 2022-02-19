@@ -21,6 +21,7 @@ export async function searchBook(text, onFinished) {
   }
   function _rawDataToBooksList(rawBooksArray) {
     if (rawBooksArray.length === 0) console.log("no books");
+    console.log("model", rawBooksArray);
 
     state.searchResults = state.searchResults = rawBooksArray.items.map(
       (book) => {
