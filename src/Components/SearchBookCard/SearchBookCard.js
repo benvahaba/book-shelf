@@ -10,11 +10,16 @@ function SearchBookCard(props) {
         props.onBookClickedHandler(props.id);
       }}
     >
-      <img
-        className="image_style"
-        src={props.imageLink}
-        alt="props.title"
-      ></img>
+      {props.imageLink !== undefined ? (
+        <img
+          className="image_style"
+          src={props.imageLink}
+          alt="props.title"
+        ></img>
+      ) : (
+        <></>
+      )}
+
       {props.title.length > 20 ? (
         <h3 className="p--medium p--bold card--info">
           {props.title.slice(0, 20) + "..."}

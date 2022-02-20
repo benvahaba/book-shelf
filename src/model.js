@@ -1,6 +1,22 @@
 import * as requestGenerator from "./utils/requestGenerator";
 
-export const state = { searchResults: [] };
+export const state = {
+  searchResults: [],
+  bookmarkedBooks: new Map(),
+};
+
+export function checkIfBookmarked(id) {
+  return state.bookmarkedBooks.has(id);
+}
+export function addToBookmark(id) {
+  state.bookmarkedBooks.set(
+    id,
+    state.searchResults.find((book) => book.id === id)
+  );
+}
+export function removeFromBookmark(id) {
+  state.bookmarkedBooks.delete(id);
+}
 
 export async function searchBook(text, onFinished) {
   //if the search is empty. empty the list and avoid 400 from server

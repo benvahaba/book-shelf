@@ -1,6 +1,10 @@
 import "./book-info.scss";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../sass/_base.scss";
+import CloseButton from "../CloseButton/CloseButton";
+import bookmarkImage from "../../assets/images/bookmarked.png";
+import notBookmarkImage from "../../assets/images/not_bookmarked.png";
+import * as model from "../../model";
 
 function BookInfo(props) {
   const {
@@ -12,18 +16,38 @@ function BookInfo(props) {
     publisher,
     publishedDate,
   } = props.book;
+  const [isBookmarked, setIsBookmarked] = useState(model.checkIfBookmarked(id));
 
+  function bookmarkHandler() {
+    if (isBookmarked) {
+      model.removeFromBookmark(id);
+    } else {
+      model.addToBookmark(id);
+    }
+    setIsBookmarked(!isBookmarked);
+  }
   return (
     <div className="book-info">
       <div className="book-info__header">
-        <div className="close_button">x</div>
+        <img
+          onClick={bookmarkHandler}
+          className="bookmark"
+          src={isBookmarked ? bookmarkImage : notBookmarkImage}
+          alt="bookmark"
+        ></img>
+        <CloseButton close={props.close} id="close_button" />
       </div>
       <div className="upper_box">
-        <img
-          className=" books--image"
-          src={imageLinks.thumbnail}
-          alt="title"
-        ></img>
+        {imageLinks !== undefined && imageLinks.thumbnail !== undefined ? (
+          <img
+            className=" books--image"
+            src={imageLinks.thumbnail}
+            alt="title"
+          ></img>
+        ) : (
+          <></>
+        )}
+
         <div className="upper_box__right">
           <p className=" font_size">
             <span className="title">{title}</span>

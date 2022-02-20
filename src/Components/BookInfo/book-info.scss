@@ -1,12 +1,13 @@
 .book-info {
   display: flex;
   flex-direction: column;
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 0rem 1rem 1rem 1rem;
   background-color: white;
   z-index: 1001;
   &__header {
-    padding: 1rem;
     display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
   }
 }
 .upper_box {
@@ -55,4 +56,9 @@ span {
   font-size: 2rem;
   border: none;
   background-color: white;
+}
+
+.bookmark {
+  width: 2.5rem;
+  height: 2.5rem;
 }

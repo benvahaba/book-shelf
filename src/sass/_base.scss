@@ -10,12 +10,6 @@ $color-text-light: white;
 
 $search-book-container-width: 20vw;
 
-.nav--link {
-  text-decoration: none;
-  font-size: 1.5rem;
-  letter-spacing: 0.5rem;
-  color: $color-text-light;
-}
 .page-container {
   padding: 3rem;
 }
@@ -57,5 +51,21 @@ h3 {
   }
   &--wight500 {
     font-weight: 500;
+  }
+}
+.background__color {
+  &--white {
+    background-color: white;
+  }
+  &--primary {
+    background-color: $color-primary-blue;
+  }
+}
+.font__color {
+  &--white {
+    color: white;
+  }
+  &--primary {
+    color: $color-primary-blue-light;
   }
 }

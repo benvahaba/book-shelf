@@ -9,7 +9,7 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import SearchImput from "../SearchInput/SearchInput";
 import ResaultContainer from "../ResaultContainer/ResaultContainer";
 import H2 from "../H2/H2";
-import SearchHeader from "../SearchHeader/SearchHeader";
+import Header from "../SearchHeader/SearchHeader";
 
 //js classes
 import * as model from "../../model";
@@ -49,13 +49,14 @@ function SearchPage() {
     pagesAmount === 0 ? setNumberOfPages(0) : setNumberOfPages(pagesAmount);
   }, [numberOfResults]);
 
+  useEffect(() => {
+    if (currentBook !== null) setOpenDialog(true);
+  }, [currentBook]);
+
   // varibles
   const initialH2Classes = "center_text letter__spacing--small welcome_user";
 
-  function getNumberOfPages(numberOfResults, maxResults) {
-    return Math.ceil(numberOfResults / maxResults);
-  }
-
+  //callbacks
   function SearchResulthandler(event) {
     setPageNum(1);
     model.searchBook(event.target.value, _onResultsFetched);
@@ -67,16 +68,17 @@ function SearchPage() {
     setCurrentBook(bookId);
   }
   function onDialogBoxCloseHandler(e) {
-    console.log("event", e);
-    if (e.target.id === "dialog_box") {
+    if (e.target.id === "dialog_box" || e.target.id === "close_button") {
       setCurrentBook(null);
-      console.log("close dialog box");
+
       setOpenDialog(false);
     }
   }
-  useEffect(() => {
-    if (currentBook !== null) setOpenDialog(true);
-  }, [currentBook]);
+
+  //functions
+  function getNumberOfPages(numberOfResults, maxResults) {
+    return Math.ceil(numberOfResults / maxResults);
+  }
 
   function booksListToJSXList(books) {
     return books.map((book) => {
@@ -86,7 +88,11 @@ function SearchPage() {
           id={book.id} // todo ask Oz if i can access the key from inside the component
           title={book.title}
           authors={book.authors}
-          imageLink={book.imageLinks.smallThumbnail}
+          imageLink={
+            typeof book.imageLinks != "undefined"
+              ? book.imageLinks.smallThumbnail
+              : undefined
+          }
           onBookClickedHandler={onBookClickedHandler}
         ></SearchBookCard>
       );
@@ -114,13 +120,13 @@ function SearchPage() {
       ) : (
         <></>
       )}
-      <SearchHeader>
+      <Header headerColor="background__color--primary">
         <SearchImput
           SearchResulthandler={SearchResulthandler}
           inputRef={inputRef}
         />
         <H2 classes={initialH2Classes}>Hi {userName}. search for some books</H2>
-      </SearchHeader>
+      </Header>
       <ResaultContainer>
         <BooksListContainer>
           {booksListToJSXList(_getBooksByPageNum(pageNum))}
