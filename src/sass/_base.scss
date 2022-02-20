@@ -69,3 +69,8 @@ h3 {
     color: $color-primary-blue-light;
   }
 }
+.nav_link {
+  text-decoration: none;
+  font-size: 1.5em;
+  transition: all 0.5s;
+}

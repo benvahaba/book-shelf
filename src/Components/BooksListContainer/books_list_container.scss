@@ -2,6 +2,7 @@
 .books_list_container {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   height: fit-content;
   padding: 5rem 3rem;

@@ -1,5 +1,5 @@
 import "./book-info.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../sass/_base.scss";
 import CloseButton from "../CloseButton/CloseButton";
 import bookmarkImage from "../../assets/images/bookmarked.png";

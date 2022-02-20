@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import userNameContext from "./hooks/context/userNameContext";
 
 //components
@@ -11,6 +11,7 @@ import Header from "./Components/Header/Header";
 //scss
 import "./sass/index.scss";
 import NavItem from "./Components/NavItem/NavItem";
+import WishlistPage from "./Components/WishlistPage/WishlistPage";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -30,11 +31,27 @@ function App() {
         {isValidUser(userName) ? (
           <>
             <Header>
-              <NavItem classes={navItemClasses}>Search</NavItem>
-              <NavItem classes={navItemClasses}>Whishlist</NavItem>
+              <NavItem classes={navItemClasses}>
+                <Link className="nav_link font__color--primary" to={"/search"}>
+                  search
+                </Link>
+              </NavItem>
+              <NavItem classes={navItemClasses}>
+                <Link
+                  className="nav_link font__color--primary"
+                  to={"/wishlist"}
+                >
+                  WishList
+                </Link>
+              </NavItem>
             </Header>
             <Routes>
               <Route path="/search" exact element={<SearchPage></SearchPage>} />
+              <Route
+                path="/wishlist"
+                exact
+                element={<WishlistPage></WishlistPage>}
+              ></Route>
             </Routes>
           </>
         ) : (
