@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./user_name_from.scss";
 import userNameContext from "../../hooks/context/userNameContext";
@@ -6,6 +6,8 @@ import userNameContext from "../../hooks/context/userNameContext";
 const UserNameForm = () => {
   const [userName, setUserName] = useContext(userNameContext);
   const [uName, setUName] = useState("");
+
+  const nameInputRef = useRef(null);
   let navigate = useNavigate();
 
   function onSubmitHandler(e) {
@@ -14,7 +16,7 @@ const UserNameForm = () => {
       setUserName(uName);
       navigate("/search");
     } else {
-      alert("please enter a valid name");
+      alert("Please enter a valid name");
     }
   }
   function onNameChangeHandler(e) {
@@ -25,6 +27,9 @@ const UserNameForm = () => {
     if (userName.length > 0) {
     }
   }, [userName]);
+  useEffect(() => {
+    nameInputRef.current.focus();
+  }, []);
 
   return userName.length === 0 ? (
     <form
@@ -42,11 +47,16 @@ const UserNameForm = () => {
         className="imput--text"
         type={"text"}
         value={uName}
+        ref={nameInputRef}
         onChange={(e) => {
           onNameChangeHandler(e);
         }}
       ></input>
-      <input className="imput--submit" type={"submit"}></input>
+      <input
+        value={"Sign in"}
+        className="imput--submit"
+        type={"submit"}
+      ></input>
     </form>
   ) : (
     <h2 className="y_spacing_one_em">Hi {userName}</h2>

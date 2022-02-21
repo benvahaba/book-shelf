@@ -1,4 +1,4 @@
-@import "../../sass/_base";
+@import "../../sass/base/_base.scss";
 .search-page {
   width: 100%;
   height: 100vh;
@@ -8,8 +8,4 @@
   position: relative;
   font-size: 2rem;
   text-align: center;
-}
-
-.book_container {
-  width: calc(100vw - $search-book-container-width);
 }

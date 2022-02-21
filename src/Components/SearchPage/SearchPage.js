@@ -1,6 +1,6 @@
 //scss imports
 import "./search-page.scss";
-import "../../sass/background--library.scss";
+
 //hooks imports
 import userNameContext from "../../hooks/context/userNameContext";
 import React, { useState, useContext, useRef, useEffect } from "react";

@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./search_header.scss";
-import "../../sass/_base.scss";
+import "../../sass/base/_base.scss";
 
 function SearchHeader(props) {
   const classes = ["search_header"];

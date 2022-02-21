@@ -1,14 +1,4 @@
-$color-primary-blue-dark: rgb(2, 49, 95);
-$color-primary-blue: rgb(2, 59, 117);
-$color-primary-blue-light: rgb(3, 76, 148);
-
-$color-primary-green-dark: rgb(0, 154, 0);
-$color-primary-green: rgb(0, 179, 0);
-$color-primary-green-light: rgb(0, 205, 0);
-
-$color-text-light: white;
-
-$search-book-container-width: 20vw;
+@import "./_variables.scss";
 
 .page-container {
   padding: 3rem;
@@ -72,5 +62,16 @@ h3 {
 .nav_link {
   text-decoration: none;
   font-size: 1.5em;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: white;
   transition: all 0.5s;
+  &:hover {
+    background: radial-gradient(
+      $color-primary-blue-light,
+      $color-primary-blue-dark
+    );
+    color: white;
+  }
 }

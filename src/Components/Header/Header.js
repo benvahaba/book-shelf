@@ -1,5 +1,5 @@
 import "./header.scss";
-import "../../sass/_base.scss";
+import "../../sass/base/_base.scss";
 import React from "react";
 function Header(props) {
   const classes = ["header"];
