@@ -21,13 +21,13 @@ function SearchBookCard(props) {
       )}
 
       {props.title.length > 20 ? (
-        <h3 className="p--medium p--bold card--info">
+        <h3 className=" p--bold card--info">
           {props.title.slice(0, 20) + "..."}
         </h3>
       ) : (
-        <h3 className="p--medium p--bold card--info">{props.title}</h3>
+        <h3 className="p--bold card--info">{props.title}</h3>
       )}
-      <p className="p--small p--wight500 card--info">{props.authors}</p>
+      <p className="p--wight500 card--info">{props.authors}</p>
     </div>
   );
 }

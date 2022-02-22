@@ -1,17 +1,9 @@
 @import "./_variables.scss";
-
+@import "../abstracts/mixins.scss";
 .page-container {
   padding: 3rem;
 }
-h1 {
-  font-size: 3em;
-}
-h2 {
-  font-size: 2em;
-}
-h3 {
-  font-size: 1em;
-}
+
 .y_spacing_one_em {
   padding: 1rem 0;
 }
@@ -30,12 +22,6 @@ h3 {
 }
 
 .p {
-  &--medium {
-    font-size: 1.5rem;
-  }
-  &--small {
-    font-size: 1rem;
-  }
   &--bol {
     font-weight: bold;
   }
@@ -63,9 +49,10 @@ h3 {
   text-decoration: none;
   font-size: 1.5em;
   width: 100%;
-  height: 100%;
+  padding: 1rem;
   text-align: center;
   background: white;
+
   transition: all 0.5s;
   &:hover {
     background: radial-gradient(

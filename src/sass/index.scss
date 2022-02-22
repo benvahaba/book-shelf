@@ -6,5 +6,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body,
+html {
   font-size: 62.5%;
+
+  @include respond(sw1800) {
+    font-size: 110%;
+  }
+  @include respond(sw1200) {
+    font-size: 100%;
+  }
+  @include respond(sw1000) {
+    font-size: 90%;
+  }
+  @include respond(sw900) {
+    font-size: 80%;
+  }
+
+  @include respond(sw600) {
+    font-size: 70%;
+  }
 }

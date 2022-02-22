@@ -1,0 +1,32 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == sw600 {
+    @media (max-width: 37.5rem) {
+      @content;
+    }
+  }
+  @if $breakpoint == sw800 {
+    @media (max-width: 50rem) {
+      @content;
+    }
+  }
+  @if $breakpoint == sw900 {
+    @media (max-width: 56.25rem) {
+      @content;
+    }
+  }
+  @if $breakpoint == sw1000 {
+    @media (max-width: 62.5rem) {
+      @content;
+    }
+  }
+  @if $breakpoint == sw1200 {
+    @media (max-width: 75rem) {
+      @content;
+    }
+  }
+  @if $breakpoint == sw1800 {
+    @media (max-width: 112.5rem) {
+      @content;
+    }
+  }
+}

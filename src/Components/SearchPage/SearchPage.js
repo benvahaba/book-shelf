@@ -9,7 +9,7 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import SearchImput from "../SearchInput/SearchInput";
 import ResaultContainer from "../ResaultContainer/ResaultContainer";
 import H2 from "../H2/H2";
-import Header from "../SearchHeader/SearchHeader";
+import SearchHeader from "../SearchHeader/SearchHeader";
 
 //js classes
 import * as model from "../../model";
@@ -120,13 +120,13 @@ function SearchPage() {
       ) : (
         <></>
       )}
-      <Header headerColor="background__color--primary">
+      <SearchHeader headerColor="background__color--primary">
         <SearchImput
           SearchResulthandler={SearchResulthandler}
           inputRef={inputRef}
         />
         <H2 classes={initialH2Classes}>Hi {userName}. search for some books</H2>
-      </Header>
+      </SearchHeader>
       <ResaultContainer>
         <BooksListContainer>
           {booksListToJSXList(_getBooksByPageNum(pageNum))}
